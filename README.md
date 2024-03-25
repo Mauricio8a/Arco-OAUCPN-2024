@@ -3,7 +3,7 @@ Se inicia esta implementación de solución informática en vista de cubir la pr
 
 Previo al desarrollo de esta fase inicial se han ejecutado procesos de análisis de necesidades y requerimientos funcionales, los mismos que han sido documentados en concordancia con los procesos de ingeniería de software y su enfoque de proyectos de desarrollo; así como la aplicación de los entregables, la planificación, la metodología de desarrollo ágil SCRUM.
 
-## Fase #1
+## Fase #1 - Base de Datos, diseño, minería y reconstrucción 
 * Inicialización de repositorios locales
 * Minería de datos (Adquisición por entregables de reportes 340 de AXIS 4.0 - Recaudación)
 * Exploración, limpieza y manupulación (VBA & Python)
