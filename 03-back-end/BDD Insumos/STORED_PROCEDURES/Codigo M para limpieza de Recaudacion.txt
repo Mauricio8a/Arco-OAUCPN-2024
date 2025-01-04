@@ -1,0 +1,76 @@
+#PERSONALIZADA AGREGADA -  REEMPLAZAR POR PROCEDURE_ID
+
+= Table.AddColumn(#"Columnas quitadas", "procedure_id", each if[PROCESO] = "Emisión de Licencia por Primera Vez" then 1
+else if[PROCESO] = "Renovación de Licencia" then 2
+else if[PROCESO] = "Duplicado o Reimpresión de Licencia" then 3
+else if[PROCESO] = "Homologación y Canje de Licencia" then 4
+else if[PROCESO] = "Permiso Internacional de Conducción" then 5
+else if[PROCESO] = "Cambio de Categoría x F" then 6
+else 0)
+
+#PERSONALIZADA AGREGADA -  REEMPLAZAR POR usraxis_ID
+= Table.AddColumn(#"Columnas quitadas1", "usraxis_id", each if [USUARIO] ="AMACIASR" then 1
+else if [USUARIO] = "AREVELO" then 2
+else if [USUARIO] = "CMIELES" then 3
+else if [USUARIO] = "DIGORDON" then 4
+else if [USUARIO] = "EAGUAYO" then 5
+else if [USUARIO] = "EPOZON" then 6
+else if [USUARIO] = "ESANTILLAN" then 7
+else if [USUARIO] = "GCASTRO" then 8
+else if [USUARIO] = "HGUERRERO" then 9
+else if [USUARIO] = "INAULA" then 10
+else if [USUARIO] = "JCMUNOZ" then 11
+else if [USUARIO] = "JLOZANO" then 12
+else if [USUARIO] = "JPROJAS" then 13
+else if [USUARIO] = "MOCHOA" then 14
+else if [USUARIO] = "NCANDO" then 15
+else if [USUARIO] = "OHUERTAS" then 16
+else if [USUARIO] = "PQUINTANA" then 17
+else if [USUARIO] = "PTCASTRO" then 18
+else if [USUARIO] = "RVJIMENEZ" then 19
+else if [USUARIO] = "SVALDIVIES" then 20
+else if [USUARIO] = "VCASTRO" then 21
+else if [USUARIO] = "VGUILLEN" then 22
+else if [USUARIO] = "XCARRERA" then 23
+else if [USUARIO] = "TNAULA" then 24
+else if [USUARIO] = "EYCONSTANT" then 25
+else if [USUARIO] = "VPIEDRA" then 26
+else 0)
+
+#PERSONALIZADA AGREGADA - REEMPLAZAR POR status_id
+= Table.AddColumn(#"Columnas quitadas2", "status_id", each 1)
+
+#PERSONALIZADA AGREGADA - REEMPLAZAR POR licence_id --OJO CON LA FALTA DE ORTOGRAFIA EN INGLES
+= Table.AddColumn(#"Columnas quitadas3", "licence_id", each if [ID_CLASE] = "A" then 1
+else if [ID_CLASE] ="B" then 2
+else if [ID_CLASE] ="C" then 3
+else if [ID_CLASE] ="D" then 4
+else if [ID_CLASE] ="E" then 5
+else if [ID_CLASE] ="F" then 6
+else if [ID_CLASE] ="G" then 7
+else if [ID_CLASE] ="A1" then 8
+else if [ID_CLASE] ="C1" then 9
+else if [ID_CLASE] ="E1" then 10
+else if [ID_CLASE] ="D1" then 11
+else 0)
+
+#CAMBIAR NOMBRE A COLUMNAS
+= Table.RenameColumns(#"Columnas quitadas4",{{"TRAMITE", "numproc"}, {"IDENTIFICACION", "identification"}, {"FECHA_TERMINO", "fproc"}, {"FECHA_CONSULTA", "ffin"}})
+
+#COLUMNAS REORDENADAS
+= Table.ReorderColumns(#"Columnas con nombre cambiado",{"procedure_id", "identification", "usraxis_id", "licence_id", "numproc", "fproc", "ffin", "status_id"})
+
+#PERSONALIZADA AGREGADA - CREACIÓN DEL AÑO DEL TRÁMITE CON year_id
+= Table.AddColumn(#"Columnas reordenadas", "year_id", each 7)
+
+#COLUMNAS REORDENADAS
+= Table.ReorderColumns(#"Personalizada agregada4",{"procedure_id", "identification", "usraxis_id", "licence_id", "year_id", "status_id", "fproc", "ffin", "numproc"})
+
+#PERSONALIZADA AGREGADA - CREACIÓN DE numfojas
+= Table.AddColumn(#"Columnas reordenadas1", "numfojas", each 0)
+
+#CAMBIO DE TIPO A COLUMNAS DE FECHA
+= Table.TransformColumnTypes(#"Personalizada agregada5",{{"fproc", type date}, {"ffin", type date}})
+
+#FINAL.- QUITAR DUPLICADOS POSIBLES EN COLUMNA numproc!
+
