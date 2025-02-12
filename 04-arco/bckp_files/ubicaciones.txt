@@ -1,0 +1,4 @@
+Dashboard.vue           js\Pages
+AppLayout.vue           js\Layouts
+Welcome.vue             /Users/mauricioochoa/Herd/arco/resources/js/Pages/Welcome.vue
+app.js                  resources/js/app.js
